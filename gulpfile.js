@@ -78,13 +78,14 @@ gulp.task(
 			.pipe(
 				$.if("css/*.css", $.replace(/\/\*# sourceMappingURL=.* \*\/$/g, ""))
 			)
-			// .pipe(gulp.dest(".test"))
+			.pipe(gulp.dest(".test"))
 			.pipe(
 				$.if(
 					[
 						"js/moment-with-locales-*.min.js",
 						"js/plugins.min.js",
 						"js/aria-ng.min.js",
+						"js/capacitor.min.js",
 					],
 					$.terser({
 						ecma: 2020,
@@ -113,6 +114,7 @@ gulp.task(
 					[
 						"js/plugins.min.js",
 						"js/aria-ng.min.js",
+						"js/capacitor.min.js",
 						"css/plugins.min.css",
 						"css/aria-ng.min.css",
 					],
