@@ -131,3 +131,4 @@ Temporary Items
 *.code-workspace
 
 .tmp
+.test
