@@ -1,0 +1,12 @@
+{
+	"appId": "com.ariang.app",
+	"appName": "AriangUI",
+	"webDir": "dist",
+	"server": {
+		"androidScheme": "http",
+		"cleartext": true
+	},
+	"android": {
+		"allowMixedContent": true
+	}
+}
