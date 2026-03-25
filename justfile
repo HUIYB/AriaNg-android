@@ -1,5 +1,7 @@
+alias op := open-plugins
+
 sync:
-    @cd ./aria2-plugin; npm run build
+    @cd ./aria2-plugin; pnpm run build
     gulp clean build
     npx cap sync
 
@@ -8,6 +10,9 @@ build: sync
 
 open:
     npx cap open
+
+open-plugins:
+    @cd ./aria2-plugin; npx cap open
 
 run:
     npx cap run android

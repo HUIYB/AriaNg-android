@@ -1,4 +1,4 @@
-(function () {
+(() => {
 	"use strict";
 
 	angular.module("ariaNg").factory("aria2", [
@@ -19,11 +19,11 @@
 			// await setName();
 			return {
 				manager: aria2,
-				init: function () {
+				init: async function () {
 					if (capacitor.getPlatform() === "web") {
 						console.log("web platform, skipping aria2 init");
 					} else {
-						aria2.start();
+						await aria2.start();
 					}
 				},
 			};
