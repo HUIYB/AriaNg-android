@@ -5,7 +5,9 @@ sync:
     gulp clean build
     npx cap sync
 
-build: sync
+build: sync && build-ns
+
+build-ns:
     npx cap build android
 
 open:
@@ -28,5 +30,7 @@ update:
 test:
     @cd ./aria2-plugin; pwd
 
-preview: sync
+preview: sync && preview-ns
+
+preview-ns:
     python -m http.server --directory dist
