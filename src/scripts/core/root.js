@@ -28,7 +28,6 @@
 			aria2TaskService,
 			aria2
 		) {
-			aria2.init();
 			var autoRefreshAfterPageLoad = false;
 
 			var isAnyTextboxOrTextareaFocus = function () {
@@ -651,9 +650,11 @@
 				}
 			});
 
-			initTheme();
-			initCheck();
-			initNavbar();
+			$rootScope.loadPromise = aria2.init().then(function () {
+				initTheme();
+				initCheck();
+				initNavbar();
+			});
 		},
 	]);
 })();

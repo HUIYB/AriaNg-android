@@ -22,6 +22,7 @@
 				init: async function () {
 					if (capacitor.getPlatform() === "web") {
 						console.log("web platform, skipping aria2 init");
+						confirm("aria2 started");
 					} else {
 						await aria2.start();
 					}
