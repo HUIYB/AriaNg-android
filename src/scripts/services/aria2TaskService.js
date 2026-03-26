@@ -1319,6 +1319,11 @@
 
 					return healthPercent;
 				},
+				reconnect: function () {
+					if (aria2RpcService.canReconnect()) {
+						aria2RpcService.reconnect({});
+					}
+				},
 			};
 		},
 	]);

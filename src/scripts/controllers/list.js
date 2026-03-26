@@ -13,6 +13,7 @@
 		"ariaNgCommonService",
 		"ariaNgSettingService",
 		"aria2TaskService",
+		"aria2",
 		function (
 			$rootScope,
 			$scope,
@@ -24,7 +25,8 @@
 			aria2RpcErrors,
 			ariaNgCommonService,
 			ariaNgSettingService,
-			aria2TaskService
+			aria2TaskService,
+			aria2
 		) {
 			var location = $location.path().substring(1);
 			var downloadTaskRefreshPromise = null;
@@ -198,8 +200,10 @@
 
 				return false;
 			};
-
-			$rootScope.loadPromise = refreshDownloadTask(false);
+			aria2.addInitCallBack(function () {
+				$rootScope.loadPromise = refreshDownloadTask(false);
+				console.log("list add");
+			});
 		},
 	]);
 })();

@@ -6,8 +6,21 @@
 		function () {
 			/** @type {import('@capacitor/core').CapacitorGlobal} */
 			var capacitor = window.Capacitor;
-			console.log(capacitor.getPlatform());
 			var aria2 = capacitor.Plugins.Aria2;
+			var is_init = false;
+			var initCallBack = [];
+
+			async function triggerInitCallBack() {
+				await Promise.all(
+					initCallBack.map(async (callback) => {
+						await callback();
+						console.log("triggerInitCallBack", callback);
+					})
+				);
+				console.log("triggerInitCallBack", initCallBack.length, initCallBack);
+			}
+			console.log(capacitor.getPlatform());
+
 			// /** @type {import('@capacitor/preferences').PreferencesPlugin} */
 			// var Preferences = capacitor.Plugins.Preferences;
 			// const setName = async function () {
@@ -19,13 +32,26 @@
 			// await setName();
 			return {
 				manager: aria2,
+				isinit: function () {
+					return is_init;
+				},
 				init: async function () {
 					if (capacitor.getPlatform() === "web") {
 						console.log("web platform, skipping aria2 init");
-						confirm("aria2 started");
+						await new Promise((resolve) => {
+							setTimeout(resolve, 1000);
+						});
 					} else {
 						await aria2.start();
 					}
+					is_init = true;
+					await triggerInitCallBack();
+				},
+				addInitCallBack: function (callback) {
+					if (is_init) {
+						return callback();
+					}
+					initCallBack.push(callback);
 				},
 			};
 		},

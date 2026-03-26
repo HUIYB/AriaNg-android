@@ -14,7 +14,7 @@ open:
     npx cap open
 
 open-plugins:
-    @cd ./aria2-plugin; npx cap open
+    @cd ./aria2-plugin; npx cap open android
 
 run:
     npx cap run android
