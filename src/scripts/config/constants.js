@@ -26,7 +26,7 @@
 			cachedDebugLogsLimit: 100,
 		})
 		.constant("ariaNgDefaultOptions", {
-			language: "en",
+			language: "zh_Hans",
 			theme: "light",
 			title: "${downspeed}, ${upspeed} - ${title}",
 			titleRefreshInterval: 5000,
@@ -40,7 +40,7 @@
 			protocol: "http",
 			httpMethod: "POST",
 			rpcRequestHeaders: "",
-			secret: "",
+			secret: "YXJpYTI=", //aria2
 			extendRpcServers: [],
 			webSocketReconnectInterval: 5000,
 			globalStatRefreshInterval: 1000,

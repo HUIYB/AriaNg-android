@@ -12,7 +12,6 @@ html {
 body {
     margin: 0;
     padding: 0;
-    -ms-user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
@@ -44,7 +43,6 @@ td {
 }
 
 .blur {
-    -webkit-filter: blur(5px);
     -moz-filter: blur(5px);
     -ms-filter: blur(5px);
     filter: blur(5px);
@@ -241,8 +239,6 @@ td {
 }
 
 .toolbar:active {
-    -webkit-box-shadow: inset 0 2px 6px rgba(0, 0, 0, .125);
-    -moz-box-shadow: inset 0 2px 6px rgba(0, 0, 0, .125);
     box-shadow: inset 0 2px 6px rgba(0, 0, 0, .125);
 }
 
@@ -260,8 +256,6 @@ td {
     left: 100%;
     margin-top: -6px;
     margin-left: -1px;
-    -webkit-border-radius: 0 6px 6px 6px;
-    -moz-border-radius: 0 6px 6px;
     border-radius: 0 6px 6px 6px;
 }
 
@@ -298,8 +292,6 @@ td {
 .dropdown-submenu.pull-left > .dropdown-menu {
     left: -100%;
     margin-left: 10px;
-    -webkit-border-radius: 6px 0 6px 6px;
-    -moz-border-radius: 6px 0 6px 6px;
     border-radius: 6px 0 6px 6px;
 }
 
@@ -341,10 +333,10 @@ td {
 .keyboard-key {
     font-size: 0.85em;
     padding: 1px 3px;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
     border-radius: 2px;
 }
+
+/*# sourceMappingURL=core.css.map */
 
 /* bootstrap */
 .btn.active.focus,
@@ -370,10 +362,6 @@ td {
 }
 
 .progress-bar {
-    -webkit-transition: initial !important;
-    -moz-transition: initial !important;
-    -ms-transition: initial !important;
-    -o-transition: initial !important;
     transition: initial !important;
 }
 
@@ -440,10 +428,6 @@ td {
 
 .fa-rotate-45 {
     -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
-    -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
     transform: rotate(45deg);
     filter: none;
 }
@@ -530,9 +514,10 @@ input-dropdown[input-class-name="form-control"] > .input-dropdown {
 /* angular-dragula extend */
 .gu-mirror {
     cursor: grabbing;
-    cursor: -moz-grabbing;
     cursor: -webkit-grabbing;
 }
+
+/*# sourceMappingURL=extend.css.map */
 
 /* global-status */
 .global-status {
@@ -554,6 +539,8 @@ input-dropdown[input-class-name="form-control"] > .input-dropdown {
 .global-status span.realtime-speed > i {
     padding-right: 2px;
 }
+
+/*# sourceMappingURL=global-status.css.map */
 
 /* task-table */
 .task-table {
@@ -582,7 +569,6 @@ input-dropdown[input-class-name="form-control"] > .input-dropdown {
 .task-table > .task-table-body.draggable {
     cursor: move;
     cursor: grab;
-    cursor: -moz-grab;
     cursor: -webkit-grab;
 }
 
@@ -694,6 +680,8 @@ input-dropdown[input-class-name="form-control"] > .input-dropdown {
 .task-table .task-right-arrow i:hover {
     color: #d8d8d8;
 }
+
+/*# sourceMappingURL=task-table.css.map */
 
 /* settings-table */
 .settings-table {
@@ -834,6 +822,8 @@ input-dropdown[input-class-name="form-control"] > .input-dropdown {
     }
 }
 
+/*# sourceMappingURL=settings-table.css.map */
+
 /* new-task-table */
 .new-task-table {
     margin-left: 15px;
@@ -877,6 +867,8 @@ input-dropdown[input-class-name="form-control"] > .input-dropdown {
 .settings-table .new-task-filter-title {
     padding-top: 6px;
 }
+
+/*# sourceMappingURL=new-task-table.css.map */
 
 /* piece-bar / piece-map */
 .piece-bar-wrapper {
@@ -934,6 +926,8 @@ input-dropdown[input-class-name="form-control"] > .input-dropdown {
     margin-right: 4px;
 }
 
+/*# sourceMappingURL=piece-bar-map.css.map */
+
 /* chart */
 .chart-popover {
     max-width: 320px;
@@ -970,75 +964,16 @@ input-dropdown[input-class-name="form-control"] > .input-dropdown {
     overflow-x: hidden;
 }
 
+/*# sourceMappingURL=chart.css.map */
+
 /* angular-promise-buttons */
-@-webkit-keyframes three-quarters {
-    0% {
-        -webkit-transform: rotate(0deg);
-        -moz-transform: rotate(0deg);
-        -ms-transform: rotate(0deg);
-        -o-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-
-    100% {
-        -webkit-transform: rotate(360deg);
-        -moz-transform: rotate(360deg);
-        -ms-transform: rotate(360deg);
-        -o-transform: rotate(360deg);
-        transform: rotate(360deg);
-    }
-}
-
-@-moz-keyframes three-quarters {
-    0% {
-        -webkit-transform: rotate(0deg);
-        -moz-transform: rotate(0deg);
-        -ms-transform: rotate(0deg);
-        -o-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-
-    100% {
-        -webkit-transform: rotate(360deg);
-        -moz-transform: rotate(360deg);
-        -ms-transform: rotate(360deg);
-        -o-transform: rotate(360deg);
-        transform: rotate(360deg);
-    }
-}
-
-@-o-keyframes three-quarters {
-    0% {
-        -webkit-transform: rotate(0deg);
-        -moz-transform: rotate(0deg);
-        -ms-transform: rotate(0deg);
-        -o-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-
-    100% {
-        -webkit-transform: rotate(360deg);
-        -moz-transform: rotate(360deg);
-        -ms-transform: rotate(360deg);
-        -o-transform: rotate(360deg);
-        transform: rotate(360deg);
-    }
-}
 
 @keyframes three-quarters {
     0% {
-        -webkit-transform: rotate(0deg);
-        -moz-transform: rotate(0deg);
-        -ms-transform: rotate(0deg);
-        -o-transform: rotate(0deg);
         transform: rotate(0deg);
     }
 
     100% {
-        -webkit-transform: rotate(360deg);
-        -moz-transform: rotate(360deg);
-        -ms-transform: rotate(360deg);
-        -o-transform: rotate(360deg);
         transform: rotate(360deg);
     }
 }
@@ -1049,10 +984,6 @@ input-dropdown[input-class-name="form-control"] > .input-dropdown {
 }
 
 .btn-spinner:not(:required) {
-    -webkit-animation: three-quarters 1250ms infinite linear;
-    -moz-animation: three-quarters 1250ms infinite linear;
-    -ms-animation: three-quarters 1250ms infinite linear;
-    -o-animation: three-quarters 1250ms infinite linear;
     animation: three-quarters 1250ms infinite linear;
     border: 3px solid #8c8c8c;
     border-right-color: transparent;
@@ -1083,6 +1014,8 @@ input-dropdown[input-class-name="form-control"] > .input-dropdown {
     margin-left: 5px;
     opacity: 1;
 }
+
+/*# sourceMappingURL=angular-promise-buttons.css.map */
 
 /* skin-aria-ng core */
 .skin-aria-ng {
@@ -1377,8 +1310,6 @@ input-dropdown[input-class-name="form-control"] > .input-dropdown {
 }
 
 .skin-aria-ng .nav-tabs-custom {
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
     box-shadow: none;
     margin-bottom: 0;
 }
@@ -1625,6 +1556,8 @@ input-dropdown[input-class-name="form-control"] > .input-dropdown {
     background-color: #f8f8f8;
     box-shadow: 1px 2px 2px #ddd;
 }
+
+/*# sourceMappingURL=default.css.map */
 
 /* skin-aria-ng core */
 .theme-dark.skin-aria-ng {
@@ -2058,3 +1991,5 @@ input-dropdown[input-class-name="form-control"] > .input-dropdown {
     background-color: #282828;
     box-shadow: 1px 2px 2px #333;
 }
+
+/*# sourceMappingURL=default-dark.css.map */

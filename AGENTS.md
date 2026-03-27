@@ -1,13 +1,14 @@
 # AGENTS.md - AriaNg Developer Guide
 
 ## Overview
-AriaNg is a modern web frontend for aria2, written in AngularJS 1.8.3. The project uses Gulp for build orchestration and has no formal test framework.
+AriaNg is a modern web frontend for aria2, written in AngularJS 1.8.3. The project uses Gulp for build orchestration and has no formal test framework. Supports Android via Capacitor.
 
 ## Build Commands
 
 ### Installation
 ```bash
 npm install
+# or pnpm install
 ```
 
 ### Build
@@ -22,14 +23,53 @@ npm install
   gulp clean build-bundle
   ```
 
+- **Capacitor Android build** (requires Android SDK):
+  ```bash
+  just sync        # builds aria2-plugin and runs gulp clean build
+  just build       # sync + npx cap build android
+  ```
+
 ### Development Server
 ```bash
 gulp serve          # Development server on port 9000
 gulp serve:dist     # Serve built files from dist/
+just server         # alias for gulp serve
 ```
 
-### Linting
-No formal linter is configured. Code style is consistent with existing codebase.
+### Source Maps
+Development tasks (`prepare-styles`, `prepare-scripts`) generate source maps by default for debugging.
+Build tasks (`gulp build`) do not generate source maps by default. To enable source maps for build:
+```bash
+SOURCE_MAPS=true gulp build
+```
+Note: Source map generation in build tasks is experimental and may not produce complete `.map` files.
+
+### Just Commands (Capacitor)
+The project includes a `justfile` with common tasks:
+- `just sync` - Build aria2-plugin, run `gulp clean build`, and sync Capacitor
+- `just build` - Sync and build Android app (`npx cap build android`)
+- `just server` - Alias for `gulp serve`
+- `just open` - Open Android project in Android Studio
+- `just run` - Run app on Android device/emulator
+- `just test` - Placeholder (currently only prints directory)
+- `just preview` - Sync and start HTTP server to serve `dist/` via Python
+
+### Linting & Formatting
+No npm scripts for linting. Use directly:
+
+- **ESLint** (configured in `.eslintrc.json`):
+  ```bash
+  npx eslint .
+  npx eslint --fix .
+  ```
+
+- **Biome** (configured in `biome.json`):
+  ```bash
+  npx biome check .
+  npx biome check --write .
+  ```
+
+- **EditorConfig** (`.editorconfig`) enforces spaces (indent size 4), LF line endings.
 
 ### Testing
 **No test framework is configured.** The `npm test` command exits with error:
@@ -79,6 +119,7 @@ npm test  # echo "Error: no test specified" && exit 0
 
 - Use `$q` for promises (not native Promises)
 - Use `$timeout` instead of native `setTimeout`
+- Prefer `angular.isArray`, `angular.isFunction`, etc.
 
 ### Error Handling
 - Use `tryFn` from `nice-try` package for safe function calls that might fail
@@ -104,6 +145,19 @@ npm test  # echo "Error: no test specified" && exit 0
 ### Capacitor Integration
 - Android support via `@capacitor/core` v8.2.0
 - Capacitor-specific code in `src/scripts/capacitor.js` (compiled to `js/capacitor.min.js`)
+- Use `just` commands for Capacitor operations
+
+### Linting Rules
+- **ESLint** (authoritative for existing code): 4-space indent, Unix line breaks, single quotes, semicolons required.
+- **Biome**: tabs for indentation, double quotes in JS, trailing commas ES5, organize imports.  
+  *Note:* Biome config conflicts with ESLint regarding indentation (tabs vs spaces) and quotes (double vs single). Follow existing code (single quotes, spaces) unless intentionally switching to Biome's conventions.
+
+### Running Lint
+To lint a single file:
+```bash
+npx eslint src/scripts/services/aria2RpcService.js
+npx biome check src/scripts/services/aria2RpcService.js
+```
 
 ## Common Tasks
 
@@ -127,3 +181,6 @@ npm test  # echo "Error: no test specified" && exit 0
 - `src/scripts/core/app.js` - Main Angular module definition
 - `src/scripts/config/aria2Options.js` - aria2 configuration options
 - `src/scripts/services/aria2RpcService.js` - Core RPC communication
+- `.eslintrc.json` - ESLint configuration
+- `biome.json` - Biome formatter/linter configuration
+- `.editorconfig` - Editor settings

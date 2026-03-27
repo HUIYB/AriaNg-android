@@ -6,6 +6,7 @@ const fs = require(`fs`);
 const git = require("git-rev-sync");
 const tryFn = require("nice-try");
 const saveLicense = require("uglify-save-license");
+const enableSourceMaps = process.env.SOURCE_MAPS === "true";
 
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
@@ -39,7 +40,9 @@ gulp.task(
 gulp.task("prepare-styles", () =>
 	gulp
 		.src(["src/styles/**/*.css"])
+		.pipe($.sourcemaps.init())
 		.pipe($.autoprefixer())
+		.pipe($.sourcemaps.write("."))
 		.pipe(gulp.dest(".tmp/styles"))
 		.pipe(reload({ stream: true }))
 );
@@ -47,9 +50,11 @@ gulp.task("prepare-styles", () =>
 gulp.task("prepare-scripts", () =>
 	gulp
 		.src(["src/scripts/**/*.js"])
+		.pipe($.sourcemaps.init())
 		.pipe($.plumber())
 		.pipe($.injectVersion({ replace: `\${ARIANG_VERSION}` }))
 		.pipe($.replace(/\${ARIANG_BUILD_COMMIT}/g, tryFn(git.short) || "Local"))
+		.pipe($.sourcemaps.write("."))
 		.pipe(gulp.dest(".tmp/scripts"))
 		.pipe(reload({ stream: true }))
 );
@@ -70,14 +75,22 @@ gulp.task("prepare-views", () =>
 
 gulp.task(
 	"prepare-html",
-	gulp.series("prepare-styles", "prepare-scripts", "prepare-views", () =>
-		gulp
+	gulp.series("prepare-styles", "prepare-scripts", "prepare-views", () => {
+		const stream = gulp
 			.src(["src/*.html"])
-			.pipe($.useref({ searchPath: [".tmp", "src", "."] }))
-			.pipe($.if("js/*.js", $.replace(/\/\/# sourceMappingURL=.*/g, "")))
-			.pipe(
-				$.if("css/*.css", $.replace(/\/\*# sourceMappingURL=.* \*\/$/g, ""))
-			)
+			.pipe($.useref({ searchPath: [".tmp", "src", "."] }));
+
+		if (enableSourceMaps) {
+			stream.pipe($.sourcemaps.init());
+		} else {
+			stream
+				.pipe($.if("js/*.js", $.replace(/\/\/# sourceMappingURL=.*/g, "")))
+				.pipe(
+					$.if("css/*.css", $.replace(/\/\*# sourceMappingURL=.* \*\/$/g, ""))
+				);
+		}
+
+		stream
 			.pipe(gulp.dest(".test"))
 			.pipe(
 				$.if(
@@ -92,13 +105,18 @@ gulp.task(
 						compress: true,
 						mangle: true,
 						output: { comments: saveLicense },
+						sourceMap: enableSourceMaps,
 					})
 				)
 			)
 			.pipe(
 				$.if(
 					["css/plugins.min.css", "css/aria-ng.min.css"],
-					$.cssnano({ safe: true, autoprefixer: false })
+					$.cssnano({
+						safe: true,
+						autoprefixer: false,
+						sourceMap: enableSourceMaps,
+					})
 				)
 			)
 			.pipe(
@@ -122,9 +140,15 @@ gulp.task(
 				)
 			)
 			.pipe($.if("*.html", $.htmlmin({ collapseWhitespace: true })))
-			.pipe($.revReplace())
-			.pipe(gulp.dest(".tmp"))
-	)
+			.pipe($.revReplace());
+
+		if (enableSourceMaps) {
+			stream.pipe($.sourcemaps.write("."));
+		}
+
+		stream.pipe(gulp.dest(".tmp"));
+		return stream;
+	})
 );
 
 gulp.task(
