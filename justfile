@@ -2,8 +2,11 @@ alias op := open-plugins
 
 sync:
     @cd ./aria2-plugin; pnpm run build
-    gulp clean build
-    npx cap sync
+    @gulp clean build
+    @npx cap sync
+
+web-build:
+    @gulp clean build
 
 build: sync && build-ns
 
@@ -14,7 +17,7 @@ open:
     npx cap open
 
 open-plugins:
-    @cd ./aria2-plugin; npx cap open android
+    cd ./aria2-plugin; npx cap open android
 
 run:
     npx cap run android

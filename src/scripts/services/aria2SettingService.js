@@ -269,6 +269,7 @@
 				setGlobalOption: function (key, value, callback, silent) {
 					var data = {};
 					data[key] = value;
+					console.log(`setGlobalOption: ${key},${value}`);
 
 					return aria2RpcService.changeGlobalOption({
 						options: data,
