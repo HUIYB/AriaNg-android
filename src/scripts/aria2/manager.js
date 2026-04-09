@@ -20,30 +20,30 @@
 				console.log("triggerInitCallBack", initCallBack.length, initCallBack);
 			}
 			console.log(capacitor.getPlatform());
-
-			/** @type {import('@capacitor/preferences').PreferencesPlugin} */
-			var Preferences = capacitor.Plugins.Preferences;
-			// const setName = async function () {
-			// 	await Preferences.set({
-			// 		key: "name",
-			// 		value: "Max",
-			// 	});
-			// };
-			// await setName();
+			if (capacitor.getPlatform() === "web") {
+				return {
+					manager: aria2,
+					isinit: function () {
+						return false;
+					},
+					init: function () {
+						console.log("web platform, skipping aria2 init");
+					},
+					addInitCallBack: function (callback) {
+						console.log("web platform callback: ", callback);
+					},
+					changeConfig: function (config, restart) {
+						console.log("web platform changeConfig: ", config, restart);
+					},
+				};
+			}
 			return {
 				manager: aria2,
 				isinit: function () {
 					return is_init;
 				},
 				init: async function () {
-					if (capacitor.getPlatform() === "web") {
-						console.log("web platform, skipping aria2 init");
-						await new Promise((resolve) => {
-							setTimeout(resolve, 1000);
-						});
-					} else {
-						await aria2.start();
-					}
+					await aria2.start();
 					is_init = true;
 					await triggerInitCallBack();
 				},
