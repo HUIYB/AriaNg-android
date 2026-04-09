@@ -19,8 +19,18 @@ open:
 open-plugins:
     cd ./aria2-plugin; npx cap open android
 
-run:
+run: sync && run-ns
+
+run-ns: && log
     npx cap run android
+
+log:
+    #!/usr/bin/env bash
+    PIDS=$(adb shell pidof com.ariang.app)
+    adb logcat --pid=$PIDS
+
+log-t tag:
+    adb logcat -s "{{ tag }}"
 
 server:
     @gulp serve

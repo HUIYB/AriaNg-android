@@ -21,8 +21,8 @@
 			}
 			console.log(capacitor.getPlatform());
 
-			// /** @type {import('@capacitor/preferences').PreferencesPlugin} */
-			// var Preferences = capacitor.Plugins.Preferences;
+			/** @type {import('@capacitor/preferences').PreferencesPlugin} */
+			var Preferences = capacitor.Plugins.Preferences;
 			// const setName = async function () {
 			// 	await Preferences.set({
 			// 		key: "name",
@@ -52,6 +52,12 @@
 						return callback();
 					}
 					initCallBack.push(callback);
+				},
+				changeConfig: function (config, restart) {
+					aria2.configure({
+						config: config,
+						restart: restart ?? false,
+					});
 				},
 			};
 		},

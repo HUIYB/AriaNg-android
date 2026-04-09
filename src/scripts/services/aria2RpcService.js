@@ -12,6 +12,7 @@
 		"ariaNgSettingService",
 		"aria2HttpRpcService",
 		"aria2WebSocketRpcService",
+		"aria2",
 		function (
 			$location,
 			$q,
@@ -22,7 +23,8 @@
 			ariaNgLogService,
 			ariaNgSettingService,
 			aria2HttpRpcService,
-			aria2WebSocketRpcService
+			aria2WebSocketRpcService,
+			aria2
 		) {
 			var rpcImplementService = ariaNgSettingService.isCurrentRpcUseWebSocket()
 				? aria2WebSocketRpcService
@@ -609,6 +611,7 @@
 				},
 				changeGlobalOption: function (context, returnContextOnly) {
 					var options = buildRequestOptions(context.options, context);
+					aria2.changeConfig(options, false);
 					return invoke(
 						buildRequestContext("changeGlobalOption", context, options),
 						!!returnContextOnly
