@@ -44,6 +44,7 @@
 				},
 				init: async function () {
 					await aria2.start();
+					aria2.checkPermission();
 					is_init = true;
 					await triggerInitCallBack();
 				},
