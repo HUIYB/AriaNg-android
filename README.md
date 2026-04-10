@@ -39,7 +39,7 @@ AriangUI is the Android application of [AriaNg](https://github.com/mayswind/Aria
 
 ### Prebuilt APK
 
-Download the latest APK from the [Releases](https://github.com/mayswind/AriaNg/releases) page.
+Download the latest APK from the [Releases](https://github.com/HUIYB/AriaNg-android/releases) page.
 
 ### Building from Source
 
@@ -95,15 +95,6 @@ Access AriaNg settings via the menu to configure:
 - Concurrent downloads
 - Connection settings
 - And all other aria2 options
-
-## Screenshots
-
-#### Main Interface
-![AriangUI](screenshots/main.png)
-#### Downloads
-![AriangUI](screenshots/downloads.png)
-#### Settings
-![AriangUI](screenshots/settings.png)
 
 ## API Reference
 
